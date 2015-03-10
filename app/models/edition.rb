@@ -14,6 +14,8 @@ class Edition < ActiveRecord::Base
   include Edition::ActiveEditors
   include Edition::Translatable
   include Edition::SpecialistSectors
+  include Dependable
+
   serialize :need_ids, Array
 
   # This mixin should go away when we switch to a search backend for admin documents
@@ -666,6 +668,13 @@ class Edition < ActiveRecord::Base
 
   def historic?
     political? && !government.current?
+  end
+
+  def republish_dependent_editions
+    super
+    # once a draft edition gets published, dependent editions are no longer
+    # affected by future changes to that edition, so no longer remain dependent.
+    dependency_records.destroy_all
   end
 
 private
