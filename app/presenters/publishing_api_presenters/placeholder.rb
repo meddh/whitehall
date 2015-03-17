@@ -21,7 +21,7 @@ class PublishingApiPresenters::Placeholder
       format: format,
       locale: I18n.locale.to_s,
       publishing_app: 'whitehall',
-      rendering_app: 'whitehall-frontend',
+      rendering_app: edition.rendering_app,
       public_updated_at: item.updated_at,
       routes: [
         {

@@ -24,7 +24,7 @@ class PublishingApiPresenters::ComingSoon
   def as_json
     {
       publishing_app: 'whitehall',
-      rendering_app: 'whitehall-frontend',
+      rendering_app: edition.rendering_app,
       format: 'coming_soon',
       title: 'Coming soon',
       locale: locale,
